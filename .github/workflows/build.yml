@@ -1,0 +1,44 @@
+name: Build SerenityOS-Emoji.ttf
+
+on: [push, pull_request]
+
+env:
+  SERENITY_SOURCE_DIR: ${{ github.workspace }}/serenity
+
+jobs:
+  build_serenityos_emoji_ttf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout self
+        uses: actions/checkout@v3
+      - name: Checkout SerenityOS
+        uses: actions/checkout@v3
+        with:
+          repository: SerenityOS/serenity
+          path: serenity
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Install dependencies
+        run: |
+          pip3 install -r requirements.txt
+      - name: Download and patch pixart2svg
+        run: |
+          wget https://gist.githubusercontent.com/m13253/66284bc244deeff0f0f8863c206421c7/raw/f9454958dc0a33cea787cc6fbd7e8e34ba6eb23b/pixart2svg.py
+          for file in patches/*.patch; do
+            patch -p0 < "$file"
+          done
+      - name: Build SerenityOS-Emoji.ttf
+        run: |
+          python main.py
+      - name: Upload Artifacts
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v3
+        with:
+          name: SerenityOS-Emoji.ttf
+          path: |
+            LICENSE
+            build/SerenityOS-Emoji.ttf
+            build/index.html
+          retention-days: 7

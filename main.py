@@ -5,7 +5,6 @@ import os
 import subprocess
 import unicodedata
 from pathlib import Path
-from typing import Iterable
 
 SERENITY_SOURCE_DIR = Path(os.environ["SERENITY_SOURCE_DIR"])
 EMOJI_PNG_DIR = SERENITY_SOURCE_DIR / "Base/res/emoji"
@@ -68,7 +67,7 @@ def convert_images() -> None:
         subprocess.call(["python3", "pixart2svg.py", str(png_file), str(svg_file)])
 
 
-def build_font(input_files: Iterable[str]) -> None:
+def build_font(emoji_svg_paths: list[str]) -> None:
     subprocess.call(
         [
             "nanoemoji",
@@ -78,12 +77,12 @@ def build_font(input_files: Iterable[str]) -> None:
             "SerenityOS-Emoji.ttf",
             "--color_format",
             "glyf_colr_1",
-            *input_files,
+            *emoji_svg_paths,
         ]
     )
 
 
-def build_html_test_file(input_files: Iterable[str]) -> None:
+def build_html_test_file(emoji_svg_paths: list[str]) -> None:
     (BUILD_DIR / "index.html").write_text(
         HTML_TEMPLATE.format(
             body="\n".join(
@@ -98,7 +97,7 @@ def build_html_test_file(input_files: Iterable[str]) -> None:
                         "</span>",
                     ]
                 )
-                for file in input_files
+                for file in emoji_svg_paths
             )
         )
     )
@@ -109,14 +108,14 @@ def main() -> None:
     convert_images()
     logger.info("Done.")
 
-    input_files = sorted(str(path) for path in EMOJI_SVG_DIR.glob("*.svg"))
+    emoji_svg_paths = sorted(str(path) for path in EMOJI_SVG_DIR.glob("*.svg"))
 
     logger.info("Building font file...")
-    build_font(input_files)
+    build_font(emoji_svg_paths)
     logger.info("Done.")
 
     logger.info("Building HTML test file...")
-    build_html_test_file(input_files)
+    build_html_test_file(emoji_svg_paths)
     logger.info("Done.")
 
 

@@ -22,6 +22,12 @@ HTML_TEMPLATE = """\
         src: url("SerenityOS-Emoji.ttf") format("truetype");
       }}
       body {{
+        font-family: sans-serif;
+      }}
+      code {{
+        font-size: 1.2em;
+      }}
+      .emoji-grid {{
         display: flex;
         flex-wrap: wrap;
       }}
@@ -34,7 +40,12 @@ HTML_TEMPLATE = """\
     </style>
   </head>
   <body>
-    {body}
+    <p>
+      <code>SerenityOS-Emoji.ttf</code> currently contains the following {emoji_count} emojis:
+    </p>
+    <section class="emoji-grid">
+      {emojis}
+    </section>
   </body>
 </html>
 """
@@ -85,7 +96,8 @@ def build_font(emoji_svg_paths: list[str]) -> None:
 def build_html_test_file(emoji_svg_paths: list[str]) -> None:
     (BUILD_DIR / "index.html").write_text(
         HTML_TEMPLATE.format(
-            body="\n".join(
+            emoji_count=len(emoji_svg_paths),
+            emojis="\n".join(
                 "".join(
                     [
                         "    ",
@@ -98,7 +110,7 @@ def build_html_test_file(emoji_svg_paths: list[str]) -> None:
                     ]
                 )
                 for file in emoji_svg_paths
-            )
+            ),
         )
     )
 

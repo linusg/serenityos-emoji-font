@@ -1,0 +1,25 @@
+--- pixart2svg.py
++++ pixart2svg.py
+@@ -76,21 +76,7 @@
+     with open(output_file, 'w', encoding='UTF-8') as f:
+         f.write('<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n')
+         f.write(f'<svg viewBox="0 0 {width} {height}" width="{width}" height="{height}" xmlns="http://www.w3.org/2000/svg">\n')
+-        f.write('  <style>\n')
+-        f.write('      .pixart2svg {\n')
+-        f.write('        color-interpolation: linearRGB;\n')
+-        f.write('        shape-rendering: geometricPrecision;\n')
+-        f.write('      }\n')
+-        f.write(f'    @media (min-width: {width * 2}px) and (min-height: {height * 2}px) {{\n')
+-        f.write('      /* Disable anti-aliasing when zoom level > 200%.\n')
+-        f.write('         However, there is currently no way to completely eliminate edge artifacts.\n')
+-        f.write('         See also: https://bugs.webkit.org/show_bug.cgi?id=35211 */\n')
+-        f.write('      .pixart2svg {\n')
+-        f.write('        shape-rendering: crispEdges;\n')
+-        f.write('      }\n')
+-        f.write('    }\n')
+-        f.write('  </style>\n')
+-        f.write('  <g class="pixart2svg">\n')
++        f.write('  <g>\n')
+         f.flush()
+         for x, y in sorted([(x, y) for y in range(height) for x in range(width)], key=lambda x: (x[0] + x[1], x[1], x[0])):
+             if is_pixel_filled[y, x]:

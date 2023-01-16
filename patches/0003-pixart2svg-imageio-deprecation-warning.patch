@@ -1,0 +1,11 @@
+--- pixart2svg.py
++++ pixart2svg.py
+@@ -17,7 +17,7 @@
+ # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ 
+ from typing import List, Set, Tuple
+-import imageio
++import imageio.v2 as imageio
+ import numpy
+ import sys
+ 

@@ -1,0 +1,47 @@
+--- pixart2svg.py
++++ pixart2svg.py
+@@ -24,7 +24,7 @@
+ 
+ def fill_block(image: numpy.ndarray, is_pixel_filled: numpy.ndarray, x: int, y: int) -> Set[Tuple[int, int]]:
+     # Flood fill algorithm
+-    pixel_color = image[y, x, :3]
++    pixel_color = image[y, x, :4]
+     color_block = [(x, y)]
+     i = 0
+     while i < len(color_block):
+@@ -34,7 +34,7 @@
+                 continue
+             if is_pixel_filled[y2, x2]:
+                 continue
+-            if (image[y2, x2, :3] == pixel_color).all():
++            if (image[y2, x2, :4] == pixel_color).all():
+                 color_block.append((x2, y2))
+                 is_pixel_filled[y2, x2] = True
+         i += 1
+@@ -69,15 +69,8 @@
+         print('Usage: pixart2svg.py <input_image_file> <output_svg_file>')
+         return 1
+     input_file, output_file = argv[1], argv[2]
+-    image = imageio.imread(input_file)
+-    if len(image.shape) != 3:
+-        print('Image must be RGB')
+-        return 1
+-
+-    height, width, channels = image.shape
+-    if channels not in (3, 4):
+-        print('Image must be RGB')
+-        return 1
++    image = imageio.imread(input_file, pilmode="RGBA")
++    height, width, _ = image.shape
+ 
+     is_pixel_filled = numpy.zeros((height, width), dtype=bool)
+     with open(output_file, 'w', encoding='UTF-8') as f:
+@@ -104,7 +97,7 @@
+                 continue
+             color_block = fill_block(image, is_pixel_filled, x, y)
+             path = generate_path(color_block)
+-            pixel_color = '#{:02x}{:02x}{:02x}'.format(image[y, x, 0], image[y, x, 1], image[y, x, 2])
++            pixel_color = '#{:02x}{:02x}{:02x}{:02x}'.format(image[y, x, 0], image[y, x, 1], image[y, x, 2], image[y, x, 3])
+             if len(path) == 4:
+                 assert path[0][1] == path[1][1]
+                 assert path[1][0] == path[2][0]

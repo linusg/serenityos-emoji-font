@@ -2,6 +2,8 @@
 
 The [SerenityOS pixel art emojis](https://emoji.serenityos.net/) embedded in a TrueType font.
 
+![banner](banner.png)
+
 ## Installation & Usage
 
 A nightly build of the font is done automatically via GitHub Actions, you can download it from [here](https://nightly.link/linusg/serenityos-emoji-font/workflows/build/main/SerenityOS-Emoji.ttf.zip).

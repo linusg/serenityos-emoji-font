@@ -37,7 +37,7 @@ Uses [`pixart2svg`](https://gist.github.com/m13253/66284bc244deeff0f0f8863c20642
   done
   ```
 
-- Build `Build SerenityOS-Emoji.ttf`:
+- Build `SerenityOS-Emoji.ttf`:
 
   ```console
   python main.py

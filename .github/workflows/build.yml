@@ -36,13 +36,18 @@ jobs:
       - name: Build SerenityOS-Emoji.ttf
         run: |
           python main.py
+      # Flatten file structure in created .zip by copying LICENSE to build/ and taking it from there
+      - name: Copy LICENSE to build directory
+        if: github.ref == 'refs/heads/main'
+        run: |
+          cp LICENSE build/
       - name: Upload Artifacts
         if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v3
         with:
           name: SerenityOS-Emoji.ttf
           path: |
-            LICENSE
+            build/LICENSE
             build/SerenityOS-Emoji.ttf
             build/index.html
           retention-days: 7

@@ -1,6 +1,10 @@
 name: Build SerenityOS-Emoji.ttf
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 0 * * *"
 
 env:
   SERENITY_SOURCE_DIR: ${{ github.workspace }}/serenity

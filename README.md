@@ -12,6 +12,12 @@ The font can be installed as a system wide font for emojis, used on a website, a
 
 Please make sure to include a copy of the [`LICENSE`](LICENSE) file when distributing the font!
 
+## What's included?
+
+Everything from [`/res/emoji`](https://github.com/SerenityOS/serenity/tree/master/Base/res/emoji), except for the private use area (PUA) emojis, which are mostly [the yaks](https://yaksplained.org/).
+
+This means that non-standard emojis such as flags and ZWJ combinations (e.g. catdog) are included as well.
+
 ## Building locally
 
 Uses [`pixart2svg`](https://gist.github.com/m13253/66284bc244deeff0f0f8863c206421c7) for vectorization of the emoji PNG images and [`nanoemoji`](https://github.com/googlefonts/nanoemoji) to build the font. SVGs are cached, so subsequent runs of the build script will be much faster.

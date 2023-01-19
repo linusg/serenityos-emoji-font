@@ -46,17 +46,20 @@ jobs:
         if: ${{ github.repository == 'linusg/serenityos-emoji-font' && github.ref == 'refs/heads/main' }}
         run: |
           cp LICENSE build/
+          cp SerenityOS-Emoji.css build/
           mkdir pages
           cp build/SerenityOS-Emoji.ttf pages
           cp build/index.html pages
+          cp build/SerenityOS-Emoji.css pages
       - name: Upload artifacts
         if: ${{ github.repository == 'linusg/serenityos-emoji-font' && github.ref == 'refs/heads/main' }}
         uses: actions/upload-artifact@v3
         with:
           name: SerenityOS-Emoji.ttf
-          # Flatten file structure in created .zip by copying LICENSE to build/ and taking it from there
+          # Flatten file structure in created .zip by copying LICENSE and SerenityOS-Emoji.css to build/ and taking them from there
           path: |
             build/LICENSE
+            build/SerenityOS-Emoji.css
             build/SerenityOS-Emoji.ttf
             build/index.html
           retention-days: 7

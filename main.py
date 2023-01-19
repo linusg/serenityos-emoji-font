@@ -16,11 +16,8 @@ HTML_TEMPLATE = """\
 <html>
   <head>
     <title>SerenityOS Emoji Font</title>
+    <link href="SerenityOS-Emoji.css" rel="stylesheet">
     <style>
-      @font-face {{
-        font-family: "SerenityOS Emoji";
-        src: url("SerenityOS-Emoji.ttf") format("truetype");
-      }}
       body {{
         font-family: sans-serif;
       }}

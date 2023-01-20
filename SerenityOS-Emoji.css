@@ -2,6 +2,6 @@
     font-display: block;
     font-family: "SerenityOS Emoji";
     font-style: normal;
-    src: local("SerenityOS Emoji") format("truetype") tech(color-COLRv1), url("SerenityOS-Emoji.ttf") format("truetype") tech(color-COLRv1);
+    src: local("SerenityOS Emoji"), url("SerenityOS-Emoji.ttf");
     unicode-range: U+00A9, U+00AE, U+203C, U+2049, U+20E3, U+2122, U+2139, U+2194-2199, U+21A9-21AA, U+231A, U+231B, U+2328, U+23CF, U+23E9-23F3, U+23F8-23FA, U+24C2, U+25AA, U+25AB, U+25B6, U+25C0, U+25FB-25FE, U+2600-27EF, U+2934, U+2935, U+2B00-2BFF, U+3030, U+303D, U+3297, U+3299, U+1F000-1F02F, U+1F0A0-1F0FF, U+1F100-1F64F, U+1F680-1F6FF, U+1F910-1F96B, U+1F980-1F9E0;
 }

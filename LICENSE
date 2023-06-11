@@ -2,12 +2,17 @@ BSD 2-Clause License
 
 As this is derivative work, the copyright holders in this license are two-fold.
 
+SerenityOS, the project which the emoji images are sourced from, uses the BSD
+2-Clause license. For simplicity the same was chosen for all files in this
+repository (including build scripts and patches), but with different copyright
+holders.
+
 - SerenityOS-Emoji.ttf and the tooling used to build it:
 
 Copyright (c) 2023, Linus Groh.
 All rights reserved.
 
-- SerenityOS emoji files contained in the TTF:
+- SerenityOS emoji image files contained in the TTF:
 
 Copyright (c) 2018-2023, the SerenityOS developers.
 Copyright (c) 2022-2023, Gegga Thor <xexxa@serenityos.org>
